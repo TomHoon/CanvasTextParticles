@@ -22,8 +22,14 @@ window.addEventListener('load', () => {
 
     console.log(ctx);
 
+    // gradient stuff
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0.3, 'red');
+    gradient.addColorStop(0.5, 'orange');
+    gradient.addColorStop(0.7, 'yellow');
+
     ctx.strokeStyle = 'orange';
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = gradient;
     ctx.font = '30px Helvetica';
     ctx.textAlign = 'center';
 
@@ -38,20 +44,22 @@ window.addEventListener('load', () => {
         let lineCounter = 0;
         let line = '';
         let words = text.split(' ');
-        
+
         for (let i = 0; i < words.length; i ++) {
             let testLine = line + words[i] + ' ';
             if (ctx.measureText(testLine).width > maxTextWidth) {
+                line = words[i] + ' ';
                 linesArray.push(testLine);
                 lineCounter ++;
             } else {
                 line = testLine;
             }
+            linesArray[lineCounter] = line;
         }
         
         let textHeight = lineHeight + lineCounter;
         let textY = canvas.height/2 - textHeight/2;
-
+        
         linesArray.forEach((item, idx) => {
             ctx.fillText(item, textX, textY + (idx * lineHeight));
         })
