@@ -44,8 +44,8 @@ window.addEventListener('load', () => {
             this.fontSize = 80;
             this.lineHeight = this.fontSize * 0.8;
             this.maxTextWidth = this.canvasWidth * 0.8;
-            this.textInput = document.getElementById('textInput');
-            this.textInput.addEventListener('keyup', () => {
+            this.textInput = document.getElementById('scanner');
+            this.textInput.addEventListener('keyup', (e) => {
                 this.context.clearRect(0,0,this.canvasWidth,this.canvasHeight);
                 this.wrapText(e.target.value);
             });
@@ -62,8 +62,6 @@ window.addEventListener('load', () => {
             this.context.fillStyle = gradient;
             this.context.font = `${this.fontSize}px Helvetica`;
             this.context.textAlign = 'center';
-            this.context.fillText(text, this.textX, this.textY);
-            this.context.strokeText(text, this.textX, this.textY);
 
             let linesArray = [];
             let words = text.split(' ');
@@ -98,55 +96,9 @@ window.addEventListener('load', () => {
 
 
     const effect = new Effect(ctx, canvas.width, canvas.height);
-    effect.wrapText('hello my man');
-    console.log('effect : ', effect);
+    // effect.wrapText('hello my man');
+    // console.log('effect : ', effect);
     function animate() {
 
     }
-    // // gradient stuff
-    // const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-    // gradient.addColorStop(0.3, 'red');
-    // gradient.addColorStop(0.5, 'orange');
-    // gradient.addColorStop(0.7, 'yellow');
-
-
-    // // ctx.fillText(text, textX, textY);
-    // // ctx.strokeText(text, textX, textY);
-    
-    // const maxTextWidth = canvas.width / 5;
-    // const lineHeight = 80; // 간격을 변수 하나로 지정해서 다루려고 함
-
-    // function wrapText(text) {
-    //     let linesArray = [];
-    //     let lineCounter = 0;
-    //     let line = '';
-    //     let words = text.split(' ');
-
-    //     for (let i = 0; i < words.length; i ++) {
-    //         let testLine = line + words[i] + ' ';
-    //         if (ctx.measureText(testLine).width > maxTextWidth) {
-    //             line = words[i] + ' ';
-    //             linesArray.push(testLine);
-    //             lineCounter ++;
-    //         } else {
-    //             line = testLine;
-    //         }
-    //         linesArray[lineCounter] = line;
-    //     }
-        
-    //     let textHeight = lineHeight + lineCounter;
-    //     let textY = canvas.height/2 - textHeight/2;
-        
-    //     linesArray.forEach((item, idx) => {
-    //         ctx.fillText(item, textX, textY + (idx * lineHeight));
-    //     })
-    // }
-
-
-    // let scanner = document.querySelector('#scanner');
-    // scanner.addEventListener('keyup', (e) => {
-    //     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    //     let inputText = e.target.value;
-    //     wrapText(inputText);
-    // });
 })
